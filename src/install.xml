@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+This file is subject to the terms and conditions defined in the "LICENSE.txt"
+file, which is part of this source code package and is also available on the
+page: https://raw.githubusercontent.com/ocmod-space/license/main/LICENSE.txt.
+-->
+
+<modification>
+    <name>[underr] Customer Group Size</name>
+    <code>customer-group-size</code>
+    <version>1.0.0</version>
+    <author>Andrii Burkatskyi aka underr</author>
+    <link>https://www.opencart.com/index.php?route=marketplace/extension&amp;filter_member=ocmod.space</link>
+
+    <file path="admin/view/template/customer/customer_group_list.t*" error="log">
+        <operation error="log" info="2.x">
+            <ignoreif regex="false" info=""><![CDATA[{{ header }}]]></ignoreif>
+            <search>
+                <![CDATA[<td class="text-right"><?php if ($sort == 'cg.sort_order') { ?>]]>
+            </search>
+            <add position="before">
+                <![CDATA[                  <!-- << Customer Group Size -->
+                  <?php if ($customer_group_size) { ?>
+                  <td class="text-right" style="width:5%;"><?php echo $column_size; ?></td>
+                  <?php } ?>
+                  <!-- Customer Group Size -->]]>
+            </add>
+        </operation>
+
+        <operation error="log" info="2.x">
+            <ignoreif regex="false" info=""><![CDATA[{{ header }}]]></ignoreif>
+            <search>
+                <![CDATA[<td class="text-right"><?php echo $customer_group['sort_order']; ?></td>]]>
+            </search>
+            <add position="before">
+                <![CDATA[                  <!-- << Customer Group Size -->
+                  <?php if ($customer_group_size) { ?>
+                  <td class="text-right"><?php echo $customer_group['size']; ?></td>
+                  <?php } ?>
+                  <!-- Customer Group Size -->]]>
+            </add>
+        </operation>
+
+        <operation error="log" info="3.x">
+            <ignoreif regex="false" info=""><![CDATA[<?php echo $header; ?>]]></ignoreif>
+            <search>
+                <![CDATA[<td class="text-right">{% if sort == 'cg.sort_order' %}]]>
+            </search>
+            <add position="before">
+                <![CDATA[                  {# << Customer Group Size #}
+                  {% if customer_group_size %}
+                  <td class="text-right" style="width:5%;">{{ column_size }}</td>
+                  {% endif %}
+                  {# >> Customer Group Size #}]]>
+            </add>
+        </operation>
+
+        <operation error="log" info="3.x">
+            <ignoreif regex="false" info=""><![CDATA[<?php echo $header; ?>]]></ignoreif>
+            <search>
+                <![CDATA[<td class="text-left">{{ customer_group.name }}</td>]]>
+            </search>
+            <add position="after">
+                <![CDATA[                  {# << Customer Group Size #}
+                  {% if customer_group_size %}
+                  <td class="text-right">{{ customer_group.size }}</td>
+                  {% endif %}
+                  {# >> Customer Group Size #}]]>
+            </add>
+        </operation>
+    </file>
+</modification>
