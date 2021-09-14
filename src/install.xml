@@ -59,9 +59,9 @@ page: https://raw.githubusercontent.com/ocmod-space/license/main/LICENSE.txt.
         <operation error="log" info="3.x">
             <ignoreif regex="false" info=""><![CDATA[<?php echo $header; ?>]]></ignoreif>
             <search>
-                <![CDATA[<td class="text-left">{{ customer_group.name }}</td>]]>
+                <![CDATA[<td class="text-right">{{ customer_group.sort_order }}</td>]]>
             </search>
-            <add position="after">
+            <add position="before">
                 <![CDATA[                  {# << Customer Group Size #}
                   {% if customer_group_size %}
                   <td class="text-right">{{ customer_group.size }}</td>
