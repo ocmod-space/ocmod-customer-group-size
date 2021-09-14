@@ -23,7 +23,7 @@ class ControllerExtensionModuleCustomerGroupSize extends Controller {
 		$this->type = 'module';
 		$this->name = 'customer_group_size';
 
-		$this->label = $this->type . '_' . $this->name;
+		$this->module = $this->type . '_' . $this->name;
 
 		$this->route = 'extension/' . $this->type . '/' . $this->name;
 		$this->class = 'model_' . str_replace('/', '_', $this->route);
@@ -49,7 +49,7 @@ class ControllerExtensionModuleCustomerGroupSize extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->load->model('setting/setting');
-			$this->model_setting_setting->editSetting($this->label, $this->request->post);
+			$this->model_setting_setting->editSetting($this->module, $this->request->post);
 
 			if (!isset($this->request->get['submit'])) {
 				$redirect_to = $this->url->link($extension_route, $user_token . '&type=' . $this->type, true);
@@ -88,10 +88,10 @@ class ControllerExtensionModuleCustomerGroupSize extends Controller {
 		$data['submit'] = $this->url->link($this->route, $user_token . '&submit=1', true);
 		$data['cancel'] = $this->url->link($extension_route, $user_token . '&type=' . $this->type, true);
 
-		if (isset($this->request->post[$this->label . '_status'])) {
-			$data['status'] = $this->request->post[$this->label . '_status'];
+		if (isset($this->request->post[$this->module . '_status'])) {
+			$data['status'] = $this->request->post[$this->module . '_status'];
 		} else {
-			$data['status'] = $this->config->get($this->label . '_status');
+			$data['status'] = $this->config->get($this->module . '_status');
 		}
 
 		$data['header'] = $this->load->controller('common/header');
@@ -166,7 +166,7 @@ class ControllerExtensionModuleCustomerGroupSize extends Controller {
 
 	// admin/view/customer/customer_group_list/before
 	public function before_customer_group_list(&$route, &$data) {
-		if ($this->config->get($this->label . '_status')) {
+		if ($this->config->get($this->module . '_status')) {
 			$data['customer_group_size']  = true;
 
 			$this->load->model($this->route);
