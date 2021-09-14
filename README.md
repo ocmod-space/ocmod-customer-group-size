@@ -11,8 +11,7 @@ The Customer Group Size extension is for Opencart CMS 2.x-3.x. The extension all
 ![](./pic/picture1.jpg)
 
 ## Live demo
-* [Admin](http://ocmod.freevar.com/oc3020/a/admin/index.php?route=extension/module/customer_group_size)
-* [Front](http://ocmod.freevar.com/oc3020/a)
+* [Admin](http://ocmod.freevar.com/oc3020/a/admin/index.php?route=customer/customer_group)
 
 ## License
 [License](https://github.com/ocmod-space/ocmod-customer-group-size/blob/main/LICENSE.txt)
